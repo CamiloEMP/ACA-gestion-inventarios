@@ -1,9 +1,12 @@
-import { Button } from './components/ui/button'
+import { RouterProvider } from 'react-router-dom'
+import { TooltipProvider } from '@radix-ui/react-tooltip'
+
+import { router } from './router'
 
 export function App() {
   return (
-    <h1 className="text-lg">
-      <Button>Hola</Button>
-    </h1>
+    <TooltipProvider>
+      <RouterProvider router={router} />
+    </TooltipProvider>
   )
 }
