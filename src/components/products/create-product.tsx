@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { PlusCircle } from 'lucide-react'
 
 import {
   Dialog,
@@ -20,7 +21,12 @@ export function CreateProduct() {
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline">Crear producto</Button>
+        <Button className="gap-1 h-7" size="sm">
+          <PlusCircle className="h-3.5 w-3.5" />
+          <span className="font-semibold sr-only sm:not-sr-only sm:whitespace-nowrap">
+            Crear producto
+          </span>
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
