@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { Form as RouterForm } from 'react-router-dom'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Loader } from 'lucide-react'
 
 import { ProductSchema, type TProductSchema } from '@/schemas/product.schema'
 
@@ -9,14 +10,12 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '../ui/input'
 import { Textarea } from '../ui/textarea'
 
-export function FormProduct() {
+export function FormProduct({ onSubmit }: { onSubmit: (data: TProductSchema) => void }) {
   const form = useForm<TProductSchema>({
     resolver: zodResolver(ProductSchema),
   })
 
-  const onSubmit = (data: TProductSchema) => {
-    console.log(data)
-  }
+  const isSubmitting = form.formState.isSubmitting
 
   return (
     <Form {...form}>
@@ -142,13 +141,24 @@ export function FormProduct() {
                 Imagen del producto <span className="ml-1 text-red-500">*</span>
               </FormLabel>
               <FormControl>
-                <Input type="file" {...field} />
+                <Input
+                  accept=".jpg, .jpeg, .png, .svg, .gif, .webp"
+                  type="file"
+                  onChange={e => {
+                    field.onChange(e.target.files ? e.target.files[0] : null)
+                  }}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <div className="flex justify-center">
+          <Button disabled={isSubmitting} type="submit">
+            {isSubmitting ? <Loader className="w-5 h-5 mr-2" /> : null}
+            Crear producto
+          </Button>
+        </div>
       </RouterForm>
     </Form>
   )
