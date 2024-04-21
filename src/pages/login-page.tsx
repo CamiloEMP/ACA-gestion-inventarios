@@ -59,7 +59,8 @@ export function LoginForm() {
   }
 
   return (
-    <main className="grid min-h-screen place-content-center bg-muted">
+    <main className="relative grid min-h-screen place-content-center">
+      <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]" />
       <Card className="mx-auto w-96">
         <CardHeader>
           <CardTitle className="text-2xl font-black">
