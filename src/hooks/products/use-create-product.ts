@@ -1,10 +1,15 @@
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
 
 import { type TProductSchema } from '@/schemas/product.schema'
 import { createProduct } from '@/services/products/create-product.service'
+import { type ProductWithId } from '@/models/product.model'
+
+import { productQueryKeys } from './product-query-keys'
 
 export function useCreateProduct() {
+  const queryClient = useQueryClient()
+
   const mutation = useMutation({
     mutationFn: createProduct,
   })
@@ -21,8 +26,19 @@ export function useCreateProduct() {
         description: product.description ?? null,
       },
       {
-        onSuccess: () => {
+        onSuccess: newProduct => {
           toast.success('Producto creado correctamente')
+
+          const previousProducts = queryClient.getQueryData<ProductWithId[]>(productQueryKeys.all)
+
+          if (previousProducts) {
+            queryClient.setQueryData<ProductWithId[]>(productQueryKeys.all, [
+              ...previousProducts,
+              newProduct,
+            ])
+          } else {
+            queryClient.setQueryData<ProductWithId[]>(productQueryKeys.all, [newProduct])
+          }
         },
         onError: () => {
           toast.error('Error creando el producto')

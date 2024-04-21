@@ -4,9 +4,11 @@ import { toast } from 'sonner'
 
 import { getAllProducts } from '@/services/products/get-all-products.service'
 
+import { productQueryKeys } from './product-query-keys'
+
 export function useAllProducts() {
   const query = useQuery({
-    queryKey: ['all-products'],
+    queryKey: productQueryKeys.all,
     queryFn: getAllProducts,
   })
 

@@ -2,6 +2,7 @@ import { addDoc } from 'firebase/firestore'
 
 import { ProductsCollection } from '@/lib/firebase/products-refs'
 import { uploadFile } from '@/lib/upload-file'
+import { type ProductWithId } from '@/models/product.model'
 
 export async function createProduct(product: {
   name: string
@@ -22,7 +23,11 @@ export async function createProduct(product: {
       image: urlImage,
     })
 
-    return docRef.id
+    return {
+      id: docRef.id,
+      ...productData,
+      image: urlImage,
+    } satisfies ProductWithId
   } catch (error) {
     throw new Error('Error creating product')
   }
