@@ -1,13 +1,13 @@
-import { Form as RouterForm } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
+import { Form as RouterForm } from 'react-router-dom'
 import { zodResolver } from '@hookform/resolvers/zod'
+
+import { ProductSchema, type TProductSchema } from '@/schemas/product.schema'
 
 import { Button } from '../ui/button'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form'
 import { Input } from '../ui/input'
 import { Textarea } from '../ui/textarea'
-
-import { ProductSchema, type TProductSchema } from '@/schemas/product.schema'
 
 export function FormProduct() {
   const form = useForm<TProductSchema>({
@@ -29,7 +29,7 @@ export function FormProduct() {
               <FormItem className="w-72">
                 <FormLabel>
                   Nombre del producto
-                  <span className="text-red-500 ml-1">*</span>
+                  <span className="ml-1 text-red-500">*</span>
                 </FormLabel>
                 <FormControl>
                   <Input {...field} />
@@ -44,7 +44,7 @@ export function FormProduct() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  Precio del producto <span className="text-red-500 ml-1">*</span>
+                  Precio del producto <span className="ml-1 text-red-500">*</span>
                 </FormLabel>
                 <FormControl>
                   <Input
@@ -81,7 +81,7 @@ export function FormProduct() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  Stock <span className="text-red-500 ml-1">*</span>
+                  Stock <span className="ml-1 text-red-500">*</span>
                 </FormLabel>
                 <FormControl>
                   <Input
@@ -124,7 +124,7 @@ export function FormProduct() {
           render={({ field }) => (
             <FormItem>
               <FormLabel>
-                Proveedor <span className="text-red-500 ml-1">*</span>
+                Proveedor <span className="ml-1 text-red-500">*</span>
               </FormLabel>
               <FormControl>
                 <Input {...field} />
@@ -139,7 +139,7 @@ export function FormProduct() {
           render={({ field }) => (
             <FormItem>
               <FormLabel>
-                Imagen del producto <span className="text-red-500 ml-1">*</span>
+                Imagen del producto <span className="ml-1 text-red-500">*</span>
               </FormLabel>
               <FormControl>
                 <Input type="file" {...field} />
