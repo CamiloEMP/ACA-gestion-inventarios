@@ -1,7 +1,7 @@
-import { Form as RouterForm } from 'react-router-dom'
+import { Form as RouterForm, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -17,11 +17,15 @@ import {
 import { GoogleIcon } from '@/components/icons'
 import { LoginSchema, type LoginSchemaType } from '@/schemas/login.schema'
 import { useAuth } from '@/hooks/use-auth'
+import { LoadingApp } from '@/components/loading-app'
 
 export function LoginForm() {
+  const navigate = useNavigate()
   const [isSignIn, setIsSignIn] = useState(true)
 
   const {
+    user,
+    isLoadingAuth,
     sigInWithGoogle,
     createUserWithEmailAndPasswordHandler,
     signInWithEmailAndPasswordHandler,
@@ -42,6 +46,16 @@ export function LoginForm() {
 
   const handleIsSignIn = () => {
     setIsSignIn(prev => !prev)
+  }
+
+  useEffect(() => {
+    if (user) {
+      navigate('/dashboard')
+    }
+  }, [user, navigate])
+
+  if (isLoadingAuth) {
+    return <LoadingApp />
   }
 
   return (

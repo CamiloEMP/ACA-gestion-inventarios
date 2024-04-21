@@ -4,6 +4,7 @@ import { MainLayout } from './layouts/main-layout'
 import { ProductsPage } from './pages/products-page'
 import { LoginForm } from './pages/login-page'
 import { AppProviders } from './providers/app-providers'
+import { ProtectedRoute } from './components/protected-route'
 
 export const router = createBrowserRouter([
   {
@@ -13,7 +14,11 @@ export const router = createBrowserRouter([
       { path: '/', element: <LoginForm /> },
       {
         path: '/dashboard',
-        element: <MainLayout />,
+        element: (
+          <ProtectedRoute>
+            <MainLayout />
+          </ProtectedRoute>
+        ),
         children: [
           { path: '/dashboard', element: <div>Dashboard</div> },
           {
