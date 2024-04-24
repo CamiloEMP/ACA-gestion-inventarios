@@ -4,6 +4,8 @@ import { toast } from 'sonner'
 import { registerSale } from '@/services/services/register-sale.service'
 import { type SaleWithId } from '@/models/sale.model'
 
+import { productQueryKeys } from '../products/product-query-keys'
+
 import { saleQueryKeys } from './sale-query-keys'
 
 export function useRegisterSale() {
@@ -32,7 +34,16 @@ export function useRegisterSale() {
           queryClient.setQueryData<SaleWithId[]>(saleQueryKeys.all, [newSale])
         }
 
-        toast.success('Venta registrada correctamente')
+        queryClient
+          .invalidateQueries({
+            queryKey: productQueryKeys.all,
+          })
+          .then(() => {
+            toast.success('Venta registrada correctamente')
+          })
+          .catch(() => {
+            toast.error('Error registrando la venta')
+          })
       },
       onError: () => {
         toast.error('Error registrando la venta')

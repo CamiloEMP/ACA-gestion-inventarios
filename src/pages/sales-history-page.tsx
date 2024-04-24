@@ -6,8 +6,6 @@ import { SalesHistoryTable } from '@/components/sales/sales-history-table'
 export function SalesHistoryPage() {
   const { salesHistory, isPending } = useSalesHistory()
 
-  console.log(salesHistory)
-
   return (
     <section className="flex flex-col h-full max-w-5xl gap-4 mx-auto mt-10">
       <Card>
