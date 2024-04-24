@@ -7,6 +7,8 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { formatCurrency } from '@/utils/format-price.utils'
 
+import { RestockProduct } from '../restock-product'
+
 const stockClass = (stock: number) => {
   if (stock > 40) {
     return 'text-green-500 bg-green-100 hover:bg-green-100 shadow-none font-bold px-1 w-28 justify-center'
@@ -92,31 +94,45 @@ export const productsColumns = ({
     header: 'Proveedor',
   },
   {
-    accessorKey: 'actions',
-    header: '',
+    accessorKey: 'restock',
+    header: 'Reabastecer',
     cell: ({ row }) => {
       return (
-        <div className="flex gap-2">
-          <Button
-            className="px-2 font-bold text-blue-500 bg-blue-100 shadow-none hover:bg-blue-500 hover:text-white"
-            size="sm"
-            onClick={() => {
-              onEdit(row.original)
-            }}
-          >
-            <Edit className="w-4 h-4" />
-          </Button>
-          <Button
-            className="px-2 font-bold text-red-500 bg-red-100 shadow-none hover:bg-red-500 hover:text-white"
-            size="sm"
-            onClick={() => {
-              onDelete(row.original)
-            }}
-          >
-            <Trash2 className="w-4 h-4" />
-          </Button>
-        </div>
+        <RestockProduct
+          product={{
+            name: row.original.name,
+            productId: row.original.id,
+          }}
+        />
       )
     },
   },
+  // {
+  //   accessorKey: 'actions',
+  //   header: '',
+  //   cell: ({ row }) => {
+  //     return (
+  //       <div className="flex gap-2">
+  //         <Button
+  //           className="px-2 font-bold text-blue-500 bg-blue-100 shadow-none hover:bg-blue-500 hover:text-white"
+  //           size="sm"
+  //           onClick={() => {
+  //             onEdit(row.original)
+  //           }}
+  //         >
+  //           <Edit className="w-4 h-4" />
+  //         </Button>
+  //         <Button
+  //           className="px-2 font-bold text-red-500 bg-red-100 shadow-none hover:bg-red-500 hover:text-white"
+  //           size="sm"
+  //           onClick={() => {
+  //             onDelete(row.original)
+  //           }}
+  //         >
+  //           <Trash2 className="w-4 h-4" />
+  //         </Button>
+  //       </div>
+  //     )
+  //   },
+  // },
 ]

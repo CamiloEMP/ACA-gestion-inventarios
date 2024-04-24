@@ -13,7 +13,7 @@ export function AppProviders() {
         <TooltipProvider>
           <Outlet />
         </TooltipProvider>
-        <Toaster richColors position="top-right" />
+        <Toaster richColors position="top-center" />
       </AuthProvider>
     </QueryProvider>
   )
