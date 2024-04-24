@@ -50,7 +50,7 @@ export function LoginForm() {
 
   useEffect(() => {
     if (user) {
-      navigate('/dashboard')
+      navigate('/dashboard/products')
     }
   }, [user, navigate])
 

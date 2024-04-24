@@ -1,9 +1,5 @@
 import { type ColumnDef } from '@tanstack/react-table'
-import { Edit, Trash2 } from 'lucide-react'
 
-import { cn } from '@/lib/utils'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
 import { formatCurrency } from '@/utils/format-price.utils'
 import { type SaleWithId } from '@/models/sale.model'
 

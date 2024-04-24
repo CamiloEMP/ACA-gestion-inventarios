@@ -21,7 +21,6 @@ export const router = createBrowserRouter([
           </ProtectedRoute>
         ),
         children: [
-          { path: '/dashboard', element: <div>Dashboard</div> },
           {
             path: 'products',
             element: <ProductsPage />,

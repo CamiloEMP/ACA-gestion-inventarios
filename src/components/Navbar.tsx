@@ -1,14 +1,9 @@
 import { NavLink } from 'react-router-dom'
-import { Home, Package, Settings, ShoppingCart } from 'lucide-react'
+import { Package, Settings, ShoppingCart } from 'lucide-react'
 
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 
 const paths = [
-  {
-    name: 'Dashboard',
-    icon: Home,
-    to: '/dashboard',
-  },
   {
     name: 'Productos',
     icon: Package,

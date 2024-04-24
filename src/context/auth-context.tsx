@@ -30,7 +30,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       await signInWithPopup(auth, googleAuthProvider)
 
-      navigate('/dashboard')
+      navigate('/dashboard/products')
     } catch (error) {
       console.error('Error on sign in with Google')
     }
