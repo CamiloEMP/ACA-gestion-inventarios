@@ -5,17 +5,18 @@ import { type ProductWithId } from '@/models/product.model'
 import { cn } from '@/lib/utils'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import { formatCurrency } from '@/utils/format-price.utils'
 
 const stockClass = (stock: number) => {
-  if (stock > 30) {
-    return 'text-green-500 bg-green-100 hover:bg-green-100 shadow-none font-bold px-2'
+  if (stock > 40) {
+    return 'text-green-500 bg-green-100 hover:bg-green-100 shadow-none font-bold px-1 w-28 justify-center'
   }
 
-  if (stock > 0) {
-    return 'text-yellow-500 bg-yellow-100 hover:bg-yellow-100 shadw-none font-bold px-2'
+  if (stock > 10) {
+    return 'text-yellow-500 bg-yellow-50 hover:bg-yellow-50 shadw-none font-bold px-1 w-28 justify-center'
   }
 
-  return 'text-red-500 bg-red-100 hover:bg-red-100 shadow-none font-bold px-2'
+  return 'text-red-500 bg-red-100 hover:bg-red-100 shadow-none font-bold px-1 w-28 justify-center'
 }
 
 export const productsColumns = ({
@@ -47,10 +48,7 @@ export const productsColumns = ({
     header: 'Precio',
     cell: ({ row }) => {
       const amount = parseFloat(row.getValue('price'))
-      const formatted = new Intl.NumberFormat('es-CO', {
-        style: 'currency',
-        currency: 'COP',
-      }).format(amount)
+      const formatted = formatCurrency(amount)
 
       return <span className="text-right">{formatted}</span>
     },
@@ -63,7 +61,7 @@ export const productsColumns = ({
 
       return (
         <span>
-          <Badge className={cn('text-right', stockClass(stock))}>{stock}</Badge>
+          <Badge className={cn('text-right', stockClass(stock))}>{stock} Unidades</Badge>
         </span>
       )
     },
@@ -83,11 +81,9 @@ export const productsColumns = ({
       }
 
       return (
-        <span className="text-right">
-          <Badge className="px-2 font-bold text-blue-500 bg-blue-100 shadow-none hover:bg-blue-100 ">
-            {discount}%
-          </Badge>
-        </span>
+        <Badge className="px-2 font-bold text-blue-500 bg-blue-100 shadow-none hover:bg-blue-100 ">
+          {discount}%
+        </Badge>
       )
     },
   },

@@ -10,7 +10,7 @@ export function ProductsPage() {
     <section className="flex flex-col h-full max-w-5xl gap-4 mx-auto mt-10">
       <Card>
         <CardHeader className="flex flex-row items-center justify-between gap-2">
-          <CardTitle>Products</CardTitle>
+          <CardTitle>Productos</CardTitle>
           <CreateProduct />
         </CardHeader>
         <CardContent>

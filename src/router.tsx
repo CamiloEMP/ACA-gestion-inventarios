@@ -5,6 +5,7 @@ import { ProductsPage } from './pages/products-page'
 import { LoginForm } from './pages/login-page'
 import { AppProviders } from './providers/app-providers'
 import { ProtectedRoute } from './components/protected-route'
+import { SalesHistoryPage } from './pages/sales-history-page'
 
 export const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ export const router = createBrowserRouter([
           {
             path: 'products',
             element: <ProductsPage />,
+          },
+          {
+            path: 'sales-history',
+            element: <SalesHistoryPage />,
           },
         ],
       },

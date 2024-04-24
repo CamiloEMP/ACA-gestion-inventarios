@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import { Home, LineChart, Package, Settings, ShoppingCart, Users2 } from 'lucide-react'
+import { Home, Package, Settings, ShoppingCart } from 'lucide-react'
 
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 
@@ -10,31 +10,21 @@ const paths = [
     to: '/dashboard',
   },
   {
-    name: 'Orders',
-    icon: ShoppingCart,
+    name: 'Productos',
+    icon: Package,
     to: '/dashboard/products',
   },
   {
-    name: 'Products',
-    icon: Package,
-    to: '/',
-  },
-  {
-    name: 'Customers',
-    icon: Users2,
-    to: '/',
-  },
-  {
-    name: 'Analytics',
-    icon: LineChart,
-    to: '/',
+    name: 'Historial de ventas',
+    icon: ShoppingCart,
+    to: '/dashboard/sales-history',
   },
 ]
 
 export function Navbar() {
   return (
     <aside
-      className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex"
+      className="fixed inset-y-0 left-0 z-10 flex-col hidden border-r w-14 bg-background sm:flex"
       id="sidebar"
     >
       <nav className="flex flex-col items-center gap-4 px-2 sm:py-4">
@@ -42,10 +32,10 @@ export function Navbar() {
           <Tooltip key={path.name}>
             <TooltipTrigger asChild>
               <NavLink
-                className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                className="flex items-center justify-center transition-colors rounded-lg h-9 w-9 text-muted-foreground hover:text-foreground md:h-8 md:w-8"
                 to={path.to}
               >
-                <path.icon className="h-5 w-5" />
+                <path.icon className="w-5 h-5" />
                 <span className="sr-only">{path.name}</span>
               </NavLink>
             </TooltipTrigger>
@@ -53,14 +43,14 @@ export function Navbar() {
           </Tooltip>
         ))}
       </nav>
-      <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-4">
+      <nav className="flex flex-col items-center gap-4 px-2 mt-auto sm:py-4">
         <Tooltip>
           <TooltipTrigger asChild>
             <NavLink
-              className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+              className="flex items-center justify-center transition-colors rounded-lg h-9 w-9 text-muted-foreground hover:text-foreground md:h-8 md:w-8"
               to="#"
             >
-              <Settings className="h-5 w-5" />
+              <Settings className="w-5 h-5" />
               <span className="sr-only">Settings</span>
             </NavLink>
           </TooltipTrigger>
