@@ -2,6 +2,7 @@ import { type ColumnDef } from '@tanstack/react-table'
 
 import { formatCurrency } from '@/utils/format-price.utils'
 import { type SaleWithId } from '@/models/sale.model'
+import { Button } from '@/components/ui/button'
 
 export const salesHistoryColumns: ColumnDef<SaleWithId>[] = [
   {
@@ -33,6 +34,17 @@ export const salesHistoryColumns: ColumnDef<SaleWithId>[] = [
       }, 0)
 
       return <span className="text-right">{formatCurrency(total)}</span>
+    },
+  },
+  {
+    accessorKey: 'makeDevolution',
+    header: 'Hacer devolución',
+    cell: () => {
+      return (
+        <Button className="px-2 py-1.5 text-xs font-bold text-red-500 bg-red-100 shadow-none h-fit hover:bg-red-500 hover:text-white">
+          Devolución
+        </Button>
+      )
     },
   },
 ]

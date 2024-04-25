@@ -4,9 +4,11 @@ import {
   signInWithPopup,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  signOut,
 } from 'firebase/auth'
 import { createContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'sonner'
 
 import { auth, googleAuthProvider } from '@/config/firebase.config'
 
@@ -16,6 +18,7 @@ interface AuthContextType {
   sigInWithGoogle: () => Promise<void>
   createUserWithEmailAndPasswordHandler: (email: string, password: string) => Promise<void>
   signInWithEmailAndPasswordHandler: (email: string, password: string) => Promise<void>
+  signOut: () => Promise<void>
 }
 
 export const AuthContext = createContext<AuthContextType>({} as AuthContextType)
@@ -56,6 +59,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
+  const signOutHandler = async () => {
+    try {
+      await signOut(auth)
+
+      toast.success('Sesión cerrada correctamente')
+      setUser(null)
+    } catch (error) {
+      toast.error('Error al cerrar sesión')
+    }
+  }
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, userLogged => {
       setUser(userLogged)
@@ -75,6 +89,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         sigInWithGoogle,
         createUserWithEmailAndPasswordHandler,
         signInWithEmailAndPasswordHandler,
+        signOut: signOutHandler,
       }}
     >
       {children}
