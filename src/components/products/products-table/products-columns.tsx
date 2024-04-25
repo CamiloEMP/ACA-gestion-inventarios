@@ -61,11 +61,7 @@ export const productsColumns = ({
     cell: ({ row }) => {
       const stock = parseInt(row.getValue('stock'), 10)
 
-      return (
-        <span>
-          <Badge className={cn('text-right', stockClass(stock))}>{stock} Unidades</Badge>
-        </span>
-      )
+      return <Badge className={cn('text-right', stockClass(stock))}>{stock} Unidades</Badge>
     },
   },
   {
@@ -107,32 +103,34 @@ export const productsColumns = ({
       )
     },
   },
-  // {
-  //   accessorKey: 'actions',
-  //   header: '',
-  //   cell: ({ row }) => {
-  //     return (
-  //       <div className="flex gap-2">
-  //         <Button
-  //           className="px-2 font-bold text-blue-500 bg-blue-100 shadow-none hover:bg-blue-500 hover:text-white"
-  //           size="sm"
-  //           onClick={() => {
-  //             onEdit(row.original)
-  //           }}
-  //         >
-  //           <Edit className="w-4 h-4" />
-  //         </Button>
-  //         <Button
-  //           className="px-2 font-bold text-red-500 bg-red-100 shadow-none hover:bg-red-500 hover:text-white"
-  //           size="sm"
-  //           onClick={() => {
-  //             onDelete(row.original)
-  //           }}
-  //         >
-  //           <Trash2 className="w-4 h-4" />
-  //         </Button>
-  //       </div>
-  //     )
-  //   },
-  // },
+  {
+    accessorKey: 'actions',
+    header: '',
+    cell: ({ row }) => {
+      return null
+
+      return (
+        <div className="flex gap-2">
+          <Button
+            className="px-2 font-bold text-blue-500 bg-blue-100 shadow-none hover:bg-blue-500 hover:text-white"
+            size="sm"
+            onClick={() => {
+              onEdit(row.original)
+            }}
+          >
+            <Edit className="w-4 h-4" />
+          </Button>
+          <Button
+            className="px-2 font-bold text-red-500 bg-red-100 shadow-none hover:bg-red-500 hover:text-white"
+            size="sm"
+            onClick={() => {
+              onDelete(row.original)
+            }}
+          >
+            <Trash2 className="w-4 h-4" />
+          </Button>
+        </div>
+      )
+    },
+  },
 ]

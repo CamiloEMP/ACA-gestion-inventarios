@@ -1,8 +1,28 @@
 import { type ColumnDef } from '@tanstack/react-table'
 
 import { formatCurrency } from '@/utils/format-price.utils'
-import { type SaleWithId } from '@/models/sale.model'
-import { Button } from '@/components/ui/button'
+import { SaleState, type SaleWithId } from '@/models/sale.model'
+import { cn } from '@/lib/utils'
+import { Badge } from '@/components/ui/badge'
+import { SaleStateSpanish } from '@/constants/sale.constants'
+
+import { MakeSaleReturn } from '../make-sale-return'
+
+const stateClass = (state: SaleState) => {
+  if (state === SaleState.Returned) {
+    return 'text-red-500 bg-red-100 hover:bg-red-100 shadow-none font-bold w-20 justify-center'
+  }
+
+  if (state === SaleState.Pending) {
+    return 'text-yellow-500 bg-yellow-50 hover:bg-yellow-50 shadw-none font-bold w-20 justify-center'
+  }
+
+  if (state === SaleState.Canceled) {
+    return 'text-neutral-500 bg-neutral-100 hover:bg-neutral-100 shadow-none font-bold w-20 justify-center'
+  }
+
+  return 'text-green-500 bg-green-100 hover:bg-green-100 shadow-none font-bold w-20 justify-center'
+}
 
 export const salesHistoryColumns: ColumnDef<SaleWithId>[] = [
   {
@@ -37,13 +57,30 @@ export const salesHistoryColumns: ColumnDef<SaleWithId>[] = [
     },
   },
   {
+    accessorKey: 'state',
+    header: 'Estado',
+    cell: ({ row }) => {
+      const state = row.getValue<SaleWithId['state']>('state')
+
+      return (
+        <Badge className={cn('text-right', stateClass(state))}>{SaleStateSpanish[state]}</Badge>
+      )
+    },
+  },
+  {
     accessorKey: 'makeDevolution',
     header: 'Hacer devolución',
-    cell: () => {
+    cell: ({ row }) => {
+      const state = row.getValue<SaleWithId['state']>('state')
+
+      if (state === SaleState.Returned) {
+        return null
+      }
+
       return (
-        <Button className="px-2 py-1.5 text-xs font-bold text-red-500 bg-red-100 shadow-none h-fit hover:bg-red-500 hover:text-white">
-          Devolución
-        </Button>
+        <div className="">
+          <MakeSaleReturn sale={row.original} />
+        </div>
       )
     },
   },

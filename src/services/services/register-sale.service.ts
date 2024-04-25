@@ -1,7 +1,7 @@
 import { addDoc, increment, writeBatch } from 'firebase/firestore'
 
 import { SalesCollection } from '@/lib/firebase/sales-refs'
-import { type SaleWithId, type Sale } from '@/models/sale.model'
+import { type SaleWithId, type Sale, SaleState } from '@/models/sale.model'
 import { firestore } from '@/config/firebase.config'
 import { getProductDocRef } from '@/lib/firebase/products-refs'
 
@@ -20,6 +20,7 @@ export async function registerSale(
 
     const saleData: Sale = {
       date,
+      state: SaleState.Paid,
       products: soldProducts,
     }
 
