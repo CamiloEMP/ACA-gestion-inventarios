@@ -4,7 +4,6 @@ import { toast } from 'sonner'
 import { registerSale } from '@/services/services/register-sale.service'
 import { type SaleWithId } from '@/models/sale.model'
 import { PRODUCT_STOCK } from '@/constants/product.constants'
-import { type ProductWithId } from '@/models/product.model'
 
 import { productQueryKeys } from '../products/product-query-keys'
 import { useAllProducts } from '../products/use-all-products'
