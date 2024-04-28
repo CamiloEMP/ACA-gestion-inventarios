@@ -33,7 +33,7 @@ export function RestockProduct({
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>
         <Button
-          className="px-2 py-0.5 font-bold text-green-500 bg-green-100 shadow-none hover:bg-green-500 hover:text-white"
+          className="px-2 py-0.5 text-xs font-bold text-green-500 bg-green-100 shadow-none hover:bg-green-500 hover:text-white"
           size="sm"
         >
           Reabastecer

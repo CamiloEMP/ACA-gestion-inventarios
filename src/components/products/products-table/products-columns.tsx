@@ -2,24 +2,12 @@ import { type ColumnDef } from '@tanstack/react-table'
 import { Edit, Trash2 } from 'lucide-react'
 
 import { type ProductWithId } from '@/models/product.model'
-import { cn } from '@/lib/utils'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { formatCurrency } from '@/utils/format-price.utils'
 
 import { RestockProduct } from '../restock-product'
-
-const stockClass = (stock: number) => {
-  if (stock > 40) {
-    return 'text-green-500 bg-green-100 hover:bg-green-100 shadow-none font-bold px-1 w-28 justify-center'
-  }
-
-  if (stock > 10) {
-    return 'text-yellow-500 bg-yellow-50 hover:bg-yellow-50 shadw-none font-bold px-1 w-28 justify-center'
-  }
-
-  return 'text-red-500 bg-red-100 hover:bg-red-100 shadow-none font-bold px-1 w-28 justify-center'
-}
+import { BadgeProductStock } from '../badge-product-stock'
 
 export const productsColumns = ({
   onDelete,
@@ -61,7 +49,7 @@ export const productsColumns = ({
     cell: ({ row }) => {
       const stock = parseInt(row.getValue('stock'), 10)
 
-      return <Badge className={cn('text-right', stockClass(stock))}>{stock} Unidades</Badge>
+      return <BadgeProductStock stock={stock} />
     },
   },
   {

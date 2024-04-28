@@ -1,11 +1,14 @@
 import { NavLink } from 'react-router-dom'
-import { LogOutIcon, Package, Settings, ShoppingCart } from 'lucide-react'
+import { BellRing, LogOutIcon, Package, Settings, ShoppingCart } from 'lucide-react'
 
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { useAuth } from '@/hooks/use-auth'
+import { useAllProducts } from '@/hooks/products/use-all-products'
 
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
 import { Button } from './ui/button'
+import { ProductsLowInStock } from './products/products-low-in-stock'
+import { ScrollArea } from './ui/scroll-area'
 
 const paths = [
   {
@@ -22,6 +25,10 @@ const paths = [
 
 export function Navbar() {
   const { user, signOut } = useAuth()
+
+  const { productsLowInStock } = useAllProducts()
+
+  const length = productsLowInStock?.length ?? 0
 
   return (
     <aside
@@ -45,6 +52,26 @@ export function Navbar() {
         ))}
       </nav>
       <nav className="flex flex-col items-center gap-4 px-2 mt-auto sm:py-4">
+        <Popover>
+          <PopoverTrigger>
+            <div className="relative flex items-center justify-center transition-colors rounded-lg h-9 w-9 text-muted-foreground hover:text-foreground md:h-8 md:w-8">
+              <BellRing className="w-5 h-5" />
+              <span className="sr-only">Productos bajos en stock</span>
+              {length > 0 && (
+                <span className="absolute flex items-center justify-center w-5 h-5 text-xs font-semibold text-white bg-red-500 rounded-full -top-2 -right-2">
+                  {length}
+                </span>
+              )}
+            </div>
+          </PopoverTrigger>
+          <PopoverContent className="mb-20 ml-2" side="right">
+            <ScrollArea className="h-36">
+              <div className="px-4">
+                <ProductsLowInStock />
+              </div>
+            </ScrollArea>
+          </PopoverContent>
+        </Popover>
         <Popover>
           <PopoverTrigger>
             <div className="flex items-center justify-center transition-colors rounded-lg h-9 w-9 text-muted-foreground hover:text-foreground md:h-8 md:w-8">

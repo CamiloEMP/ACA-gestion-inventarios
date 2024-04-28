@@ -3,6 +3,8 @@ import { toast } from 'sonner'
 
 import { restockProduct } from '@/services/products/restock-product.service'
 
+import { saleQueryKeys } from '../sales/sale-query-keys'
+
 import { productQueryKeys } from './product-query-keys'
 
 export function useRestockProducts() {
@@ -31,6 +33,10 @@ export function useRestockProducts() {
           // eslint-disable-next-line @typescript-eslint/no-floating-promises
           queryClient.invalidateQueries({
             queryKey: productQueryKeys.all,
+          })
+          // eslint-disable-next-line @typescript-eslint/no-floating-promises
+          queryClient.invalidateQueries({
+            queryKey: saleQueryKeys.all,
           })
         },
         onError: () => {

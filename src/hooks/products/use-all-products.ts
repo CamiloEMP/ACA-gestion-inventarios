@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { toast } from 'sonner'
 
 import { getAllProducts } from '@/services/products/get-all-products.service'
+import { PRODUCT_STOCK } from '@/constants/product.constants'
 
 import { productQueryKeys } from './product-query-keys'
 
@@ -18,8 +19,11 @@ export function useAllProducts() {
     }
   }, [query.error?.message, query.isError])
 
+  const productsLowInStock = query.data?.filter(product => product.stock < PRODUCT_STOCK.LOW)
+
   return {
     ...query,
     products: query.data,
+    productsLowInStock,
   }
 }
