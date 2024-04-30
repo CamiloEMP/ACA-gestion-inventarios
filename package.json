@@ -7,7 +7,11 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "playwright test",
+    "test:watch": "playwright test --watch",
+    "test:debug": "playwright test --inspect",
+    "test:report": "playwright show-report"
   },
   "dependencies": {
     "@fontsource-variable/manrope": "^5.0.20",
@@ -37,6 +41,7 @@
     "zod": "^3.22.5"
   },
   "devDependencies": {
+    "@playwright/test": "^1.43.1",
     "@tanstack/eslint-plugin-query": "^5.28.11",
     "@types/node": "^20.12.7",
     "@types/react": "^18.2.66",
