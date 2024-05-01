@@ -2,6 +2,7 @@ import { Form as RouterForm, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect, useState } from 'react'
+import { Loader } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -21,7 +22,7 @@ import { LoadingApp } from '@/components/loading-app'
 
 export function LoginForm() {
   const navigate = useNavigate()
-  const [isSignIn, setIsSignIn] = useState(true)
+  const [isSignIn, setIsSignIn] = useState(false)
 
   const {
     user,
@@ -36,12 +37,11 @@ export function LoginForm() {
   })
 
   const onSubmit = async (data: LoginSchemaType) => {
-    if (isSignIn) {
+    if (!isSignIn) {
       await signInWithEmailAndPasswordHandler(data.email, data.password)
-
-      return
+    } else {
+      await createUserWithEmailAndPasswordHandler(data.email, data.password)
     }
-    await createUserWithEmailAndPasswordHandler(data.email, data.password)
   }
 
   const handleIsSignIn = () => {
@@ -105,7 +105,8 @@ export function LoginForm() {
                   </FormItem>
                 )}
               />
-              <Button className="w-full" type="submit">
+              <Button className="w-full" disabled={form.formState.isSubmitting} type="submit">
+                {form.formState.isSubmitting ? <Loader className="w-5 h-5 mr-2" /> : null}
                 {isSignIn ? 'Registrarse' : 'Iniciar sesión'}
               </Button>
               <Button className="w-full" type="button" variant="outline" onClick={sigInWithGoogle}>
@@ -114,14 +115,15 @@ export function LoginForm() {
               </Button>
             </RouterForm>
           </Form>
-          <div className="mt-4 text-xs text-center">
-            {isSignIn ? '¿No tienes una cuenta?' : '¿Ya tienes una cuenta?'}{' '}
+          <div className="flex items-center justify-center gap-1 mt-4 text-xs text-center">
+            {!isSignIn ? '¿No tienes una cuenta?' : '¿Ya tienes una cuenta?'}{' '}
             <Button
               className="px-0 text-xs font-semibold w-fit"
+              type="button"
               variant="link"
               onClick={handleIsSignIn}
             >
-              {isSignIn ? 'Registrate' : 'Iniciar sesión'}
+              {!isSignIn ? 'Registrate' : 'Iniciar sesión'}
             </Button>
           </div>
         </CardContent>

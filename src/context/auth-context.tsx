@@ -41,9 +41,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signInWithEmailAndPasswordHandler = async (email: string, password: string) => {
     try {
-      await signInWithEmailAndPassword(auth, email, password)
+      const response = await signInWithEmailAndPassword(auth, email, password)
 
-      setUser(user)
+      setUser(response.user)
     } catch (error) {
       console.error('Error on sign in with email and password')
     }
@@ -51,9 +51,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const createUserWithEmailAndPasswordHandler = async (email: string, password: string) => {
     try {
-      await createUserWithEmailAndPassword(auth, email, password)
+      const response = await createUserWithEmailAndPassword(auth, email, password)
 
-      setUser(user)
+      setUser(response.user)
     } catch (error) {
       console.error('Error on create user with email and password')
     }
