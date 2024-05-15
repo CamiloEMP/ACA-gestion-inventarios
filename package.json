@@ -11,11 +11,13 @@
     "test": "playwright test",
     "test:watch": "playwright test --watch",
     "test:debug": "playwright test --inspect",
-    "test:report": "playwright show-report"
+    "test:report": "playwright show-report",
+    "test:ui": "playwright test --ui"
   },
   "dependencies": {
     "@fontsource-variable/manrope": "^5.0.20",
     "@hookform/resolvers": "^3.3.4",
+    "@nearform/playwright-firebase": "^1.2.8",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-checkbox": "^1.0.4",
     "@radix-ui/react-dialog": "^1.0.5",
@@ -29,6 +31,7 @@
     "@tanstack/react-table": "^8.16.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
+    "dotenv": "^16.4.5",
     "firebase": "^10.11.0",
     "lucide-react": "^0.372.0",
     "react": "^18.2.0",
